@@ -1,15 +1,26 @@
 <?php
 /**
  * --------------------------------
- *     PLATINUM PHP - File
+ *    Fluorine - OOP PHP - File
  * --------------------------------
  * This file is under the MIT license.
+ * This file is apart of the Fluorine OSS Project by FoxWorn3365 (Federico Cosma)
+ * 
+ * Some right are reserved.
+ * 
+ * Contact:
+ *  - Email: foxworn3365@gmail.com
+ *  - Discord: FoxWorn#0001
+ * 
+ * GitHub:
+ *  - Author: https://github.com/FoxWorn3365
+ *  - Repository: https://github.com/FoxWorn3365/Fluorine
  * 
  * (C) 2023-now FoxWorn3365
 */
-namespace Platinum;
-use Platinum\ClearObject;
-use Platinum\NextArray;
+namespace Fluorine;
+use Fluorine\ClearObject;
+use Fluorine\NextArray;
 
 class NextObject {
     protected object $elements;
@@ -69,14 +80,14 @@ class NextObject {
 
     public function remove(string $type, string $search) : bool {
         if ($type === 'key') {
-            $this->foreach(function(string $key) {
+            $this->foreach(function(string $key) use ($search) {
                 if ($key === $search) {
                     $this->elements->{$key} = NULL;
                 }
             });
             return true;
         } elseif ($type === 'value') {
-            $this->foreach(function(string $key, mixed $value) {
+            $this->foreach(function(string $key, mixed $value) use ($search) {
                 if ($value === $search) {
                     $this->elements->{$key} = NULL;
                 }
@@ -99,5 +110,29 @@ class NextObject {
 
     public function exists(string $offset) : bool {
         return $this->is($offset);
+    }
+
+    private function objectify() : void {
+        $this->elements = (object)$this->elements;
+    }
+
+    public function asort() : void {
+        asort((array)$this->elements);
+        $this->objectify();
+    }
+
+    public function ksort() : void {
+        ksort((array)$this->elements);
+        $this->objectify();
+    }
+
+    public function arsort() : void {
+        arsort((array)$this->elements);
+        $this->objectify();
+    }
+
+    public function krsort() : void {
+        krsort((array)$this->elements);
+        $this->objectify();
     }
 }

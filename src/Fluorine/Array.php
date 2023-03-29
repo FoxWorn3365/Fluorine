@@ -1,22 +1,34 @@
 <?php
 /**
  * --------------------------------
- *     PLATINUM PHP - File
+ *    Fluorine - OOP PHP - File
  * --------------------------------
  * This file is under the MIT license.
+ * This file is apart of the Fluorine OSS Project by FoxWorn3365 (Federico Cosma)
+ * 
+ * Some right are reserved.
+ * 
+ * Contact:
+ *  - Email: foxworn3365@gmail.com
+ *  - Discord: FoxWorn#0001
+ * 
+ * GitHub:
+ *  - Author: https://github.com/FoxWorn3365
+ *  - Repository: https://github.com/FoxWorn3365/Fluorine
  * 
  * (C) 2023-now FoxWorn3365
 */
 
-namespace Platinum;
-use Platinum\ClearObject;
+namespace Fluorine;
+use Fluorine\ClearObject;
 
 class NextArray {
-    protected object|NULL $elements;
+    protected object|NULL|array $elements;
     protected self|null $backup;
+    protected int $count = 0;
 
     function __construct(NextArray|array $element = NULL) {
-        $this->elements = new ClearObject();
+        $this->elements = new \Fluorine\ClearObject();
 
         if ($element !== NULL) {
             $this->internalImport($element);
@@ -39,16 +51,26 @@ class NextArray {
         return $val;
     }
 
-    public function count() : int {
+    public function arraycount() : int {
         return count((array)$this->elements);
     }
 
+    public function count() : int {
+        $counter = 0;
+        foreach ($this->elements as $v) {
+            $v = NULL;
+            $counter++;
+        }
+        return $counter;
+    }
+
     public function end() : mixed {
-        return $this->elements->{$this->count()-1};
+        return $this->elements->{$this->count-1};
     }
 
     public function add(mixed $element) : void {
-        $this->elements->{$this->count()} = $element;
+        $this->elements->{$this->count} = $element;
+        $this->count++;
     }
 
     public function foreach(callable $callback) : void {
@@ -93,7 +115,7 @@ class NextArray {
         });
     }
 
-    protected function internalImport(NextArray|array $element, bool $override) : void {
+    protected function internalImport(NextArray|array $element) : void {
         if ($element instanceof NextArray) {
             $element->foreach(function (mixed $value) {
                 $this->add($value);
@@ -143,7 +165,7 @@ class NextArray {
 
         $el = new NextArray();
 
-        $this->foreach(function (mixed $value) use ($el) {
+        $this->foreach(function (mixed $value) use ($el, $values) {
             if (!in_array($value, $values)) {
                 $el->add($value);
             }
@@ -154,5 +176,25 @@ class NextArray {
 
     public function push(mixed $value) {
         $this->add($value);
+    }
+
+    private function toArray() : void {
+        $this->elements = (array)$this->elements;
+    }
+
+    private function toObject() : void {
+        $this->elements = (object)$this->elements;
+    }
+
+    public function sort() : void {
+        $this->toArray();
+        sort($this->elements);
+        $this->toObject();
+    }
+
+    public function asort() : void {
+        $this->toArray();
+        asort($this->elements);
+        $this->toObject();
     }
 }
