@@ -230,4 +230,7 @@ class NextArray {
         return (array)$this->elements;
     }
 
+    public function random() : mixed {
+        return $this->elements->{rand(0, $this->count)};
+    }
 }
