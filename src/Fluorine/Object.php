@@ -52,16 +52,18 @@ class NextObject {
         return $this->elements;
     }
 
-    public function import(object $element, bool $override) : void {
+    public function import(object $element, bool $override = true) : self {
         if ($element instanceof NextObject && $element !== NULL) {
-            $this->baseImport($element->getElements());
+            $this->baseImport($element->getElements(), $override);
         } elseif ($element !== NULL) {
-            $this->baseImport($element);
+            $this->baseImport($element, $override);
         }
+        return $this;
     }
 
-    public function join(object $element, bool $override) : void {
+    public function join(object $element, bool $override) : self {
         $this->import($element, $override);
+        return $this;
     }
 
     public function __get(string $offset) : mixed {
@@ -116,23 +118,31 @@ class NextObject {
         $this->elements = (object)$this->elements;
     }
 
-    public function asort() : void {
+    public function asort() : self {
         asort((array)$this->elements);
         $this->objectify();
+        return $this;
     }
 
-    public function ksort() : void {
+    public function ksort() : self {
         ksort((array)$this->elements);
         $this->objectify();
+        return $this;
     }
 
-    public function arsort() : void {
+    public function arsort() : self {
         arsort((array)$this->elements);
         $this->objectify();
+        return $this;
     }
 
-    public function krsort() : void {
+    public function krsort() : self {
         krsort((array)$this->elements);
         $this->objectify();
+        return $this;
+    }
+
+    public function new(object $array) : NextObject {
+        return new NextObject($array);
     }
 }

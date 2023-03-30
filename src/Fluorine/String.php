@@ -29,8 +29,13 @@ class NextString {
         $this->string = $string;
     }
 
-    public function set(string $string) : void {
+    public function new(string $array) : NextString {
+        return new NextString($array);
+    }
+
+    public function set(string $string) : self {
         $this->string = $string;
+        return $this;
     }
 
     public function stripos(mixed $needle) : bool {
@@ -54,7 +59,7 @@ class NextString {
         return $array;
     }
 
-    public function implode(NextArray|array $collapse, string $delimiter) : void {
+    public function implode(NextArray|array $collapse, string $delimiter) : self {
         if ($collapse instanceof NextArray) {
             $values = $collapse->values();
         } else {
@@ -62,38 +67,44 @@ class NextString {
         }
 
         $this->string = implode($delimiter, $values);
+        return $this;
     }
 
     public function split(string $delimiter) : NextArray {
         return $this->explode($delimiter);
     }
 
-    public function replace(string $char1, string $char2) : void {
+    public function replace(string $char1, string $char2) : self {
         $this->string = str_replace($char1, $char2, $this->string);
+        return $this;
     }
 
-    public function remove(string $char) : void {
+    public function remove(string $char) : self {
         $this->string = str_replace($char, "", $this->string);
+        return $this;
     }
 
     public function clone() : self {
         return $this;
     }
 
-    public function toBase64() : void {
+    public function toBase64() : self {
         $this->string = base64_encode($this->string);
+        return $this;
     }
 
-    public function fromBase64() : void {
+    public function fromBase64() : self {
         $this->string = base64_decode($this->string);
+        return $this;
     }
 
     public function __toString() : string {
         return $this->string;
     }
 
-    public function md5() : void {
+    public function md5() : self {
         $this->string = md5($this->string);
+        return $this;
     }
 
     public function print() : void {

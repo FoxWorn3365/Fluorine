@@ -25,7 +25,7 @@ use Fluorine\ClearObject;
 class NextArray {
     protected object|NULL|array $elements;
     protected self|null $backup;
-    protected int $count = 0;
+    public int $count = 0;
 
     function __construct(NextArray|array $element = NULL) {
         $this->elements = new \Fluorine\ClearObject();
@@ -41,6 +41,10 @@ class NextArray {
 
     public function elements() : object {
         return $this->elements;
+    }
+
+    public function new(array $array) : NextArray {
+        return new NextArray($array);
     }
 
     public function values() : array {
@@ -68,9 +72,10 @@ class NextArray {
         return $this->elements->{$this->count-1};
     }
 
-    public function add(mixed $element) : void {
+    public function add(mixed $element) : self {
         $this->elements->{$this->count} = $element;
         $this->count++;
+        return $this;
     }
 
     public function foreach(callable $callback) : void {
@@ -89,19 +94,21 @@ class NextArray {
         }
     }
 
-    public function clear() : void {
+    public function clear() : self {
         $this->completeForeach(function (int $key, mixed $value) {
             if ($value === NULL) {
                 unset($this->elements->{$key});
             }
         });
+        return $this;
     }
 
-    public function remove(mixed $element, bool $shift = true) : void {
+    public function remove(mixed $element, bool $shift = true) : self {
         $this->completeForeach(function (int $key, mixed $value) use ($shift, $element) {
             if ($value === $element) {
                 // unset($this->elements->{$key});
                 $this->elements->{$key} = NULL;
+                $this->count--;
 
                 if ($shift) {
                     $this->completeForeach(function (int $key, mixed $value) {
@@ -113,6 +120,7 @@ class NextArray {
                 }
             } 
         });
+        return $this;
     }
 
     protected function internalImport(NextArray|array $element) : void {
@@ -127,15 +135,16 @@ class NextArray {
         }
     }
 
-    public function set(int $offset, mixed $value) {
+    public function set(int $offset, mixed $value) : self {
         $this->elements->{$offset} = $value;
+        return $this;
     }
     
     public function clone() : NextArray {
         return $this;
     }
 
-    public function chunk(int $lenght, bool $backup = false) : void {
+    public function chunk(int $lenght, bool $backup = false) : self {
         if ($backup) {
             $this->backup = NULL;
             $this->backup = $this;
@@ -154,6 +163,7 @@ class NextArray {
                 $counter = 1;
             }
         }
+        return $this;
     }
 
     public function diff(NextArray|array $object) : NextArray {
@@ -174,8 +184,9 @@ class NextArray {
         return $el;
     }
 
-    public function push(mixed $value) {
+    public function push(mixed $value) : self {
         $this->add($value);
+        return $this;
     }
 
     private function toArray() : void {
@@ -186,16 +197,18 @@ class NextArray {
         $this->elements = (object)$this->elements;
     }
 
-    public function sort() : void {
+    public function sort() : self {
         $this->toArray();
         sort($this->elements);
         $this->toObject();
+        return $this;
     }
 
-    public function asort() : void {
+    public function asort() : self {
         $this->toArray();
         asort($this->elements);
         $this->toObject();
+        return $this;
     }
 
     private function importValues(NextArray|array $object) : array {

@@ -19,6 +19,9 @@
  * (C) 2023-now FoxWorn3365
 */
 namespace Fluorine;
+use Fluorine\NextArray;
+use Fluorine\NextObject;
+use Fluorine\NextString;
 
 class ClearObject {}
 class Fluorine {
@@ -26,4 +29,16 @@ class Fluorine {
     public const LICENSE = "MIT";
     public const GITHUB = "https://github.com/FoxWorn3365/Fluorine";
     public const NUMER = 9;
+
+    public static function string(string $string) : NextString {
+        return new NextString($string);
+    }
+
+    public static function array(array $element) : NextArray {
+        return new NextArray($element);
+    }
+
+    public static function object(object $obj) : NextObject {
+        return new NextObject($obj);
+    }
 }
