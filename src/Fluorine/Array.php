@@ -239,6 +239,16 @@ class NextArray {
         return $counter;
     }
 
+    public function find(string $value) : int {
+        $counter = 0;
+        foreach ($this->elements as $key => $val) {
+            if ($value === $val) {
+                return $counter;
+            }
+            $counter++;
+        }
+    }
+
     public function __toArray() {
         return (array)$this->elements;
     }
