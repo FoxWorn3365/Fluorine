@@ -1,0 +1,17 @@
+{
+    "name": "foxworn3365/fluorine",
+    "description": "A simple library in PHP for handling arrays and strings object oriented",
+    "license": "MIT",
+    "require": {
+      "php": ">=8.0"
+    },
+    "authors": [
+      {
+        "name": "Federico Cosma",
+        "email": "foxworn3365@gmail.com"
+      }
+    ],
+    "autoload": {
+      "psr-4": {"Fluorine\\": "src/Fluorine/"}
+    }
+  }

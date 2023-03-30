@@ -197,4 +197,37 @@ class NextArray {
         asort($this->elements);
         $this->toObject();
     }
+
+    private function importValues(NextArray|array $object) : array {
+        if ($object instanceof NextArray) {
+            return $object->values();
+        } else {
+            return $object;
+        }
+    }
+
+    public function have(string $value) : bool {
+        foreach ($this->elements as $element) {
+            if ($element == $value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function compare(NextArray|array $term) : int {
+        $counter = 0;
+        $array = $this->importValues($term);
+        foreach ($array as $value) {
+            if ($this->have($value)) {
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+
+    public function __toArray() {
+        return (array)$this->elements;
+    }
+
 }
