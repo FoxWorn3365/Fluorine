@@ -252,6 +252,7 @@ class NextArray {
             }
             $counter++;
         }
+        return $counter;
     }
 
     public function __toArray() {
