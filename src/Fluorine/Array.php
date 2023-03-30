@@ -21,6 +21,7 @@
 
 namespace Fluorine;
 use Fluorine\ClearObject;
+use Fluorine\NextObject;
 
 class NextArray {
     protected object|NULL|array $elements;
@@ -28,7 +29,7 @@ class NextArray {
     public int $count = 0;
 
     function __construct(NextArray|array $element = NULL) {
-        $this->elements = new \Fluorine\ClearObject();
+        $this->elements = new ClearObject();
 
         if ($element !== NULL) {
             $this->internalImport($element);
@@ -92,6 +93,10 @@ class NextArray {
                 $callback($key, $value);
             }
         }
+    }
+
+    public function rand() : mixed {
+        return $this->elements->{rand(0, $this->count-1)};
     }
 
     public function clear() : self {
@@ -255,5 +260,9 @@ class NextArray {
 
     public function random() : mixed {
         return $this->elements->{rand(0, $this->count)};
+    }
+
+    public function implode(string $glue) : NextObject {
+        return implode($glue, (array)$this->elements);
     }
 }
