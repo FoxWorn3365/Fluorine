@@ -262,7 +262,7 @@ class NextArray {
         return $this->elements->{rand(0, $this->count)};
     }
 
-    public function implode(string $glue) : NextObject {
-        return implode($glue, (array)$this->elements);
+    public function implode(string $glue) : NextString|string {
+        return new NextString(implode($glue, (array)$this->elements));
     }
 }
