@@ -74,6 +74,24 @@ class NextString {
         return str_split($this->string);
     }
 
+    public function cut(int $delimiter) : self {
+        $count = 0;
+        $compose = '';
+        foreach($this->split()->values() as $key) {
+            if ($count >= $delimiter) {
+                break;
+            }
+            $compose .= $key;
+            $count++;
+        }
+        $this->string = $compose;
+        return $this;
+    }
+
+    public function lenght() : int {
+        return strlen($this->string);
+    }
+
     public function string() : string {
         return $this->string;
     }
