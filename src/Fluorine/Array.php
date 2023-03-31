@@ -271,4 +271,13 @@ class NextArray {
     public function implode(string $glue) : NextString|string {
         return new NextString(implode($glue, (array)$this->elements));
     }
+
+    public function equal(NextArray $array) : NextArray {
+        $el = new NextArray();
+        foreach ($this->elements as $element) {
+            if ($array->have($element)) {
+                $el->add($element);
+            }
+        }
+    }
 }
