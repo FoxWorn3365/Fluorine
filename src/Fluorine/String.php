@@ -71,7 +71,7 @@ class NextString {
     }
 
     public function split() : NextArray {
-        return str_split($this->string);
+        return new NextArray(str_split($this->string));
     }
 
     public function cut(int $delimiter) : self {
