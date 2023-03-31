@@ -79,8 +79,12 @@ class NextString {
         return $this;
     }
 
+    public function cutString(int $delimiter) : string {
+        return substr($this->string, 0, -$delimiter);
+    }
+
     public function last(int $delimiter) : self {
-        $this->remove($this->cut($delimiter));
+        $this->remove($this->cutString($delimiter));
         return $this;
     }
 
