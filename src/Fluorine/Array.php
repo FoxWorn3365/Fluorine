@@ -279,5 +279,6 @@ class NextArray {
                 $el->add($element);
             }
         }
+        return $el;
     }
 }
