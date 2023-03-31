@@ -30,15 +30,15 @@ class Fluorine {
     public const GITHUB = "https://github.com/FoxWorn3365/Fluorine";
     public const NUMER = 9;
 
-    public static function string(string $string) : NextString {
+    public static function string(string $string = NULL) : NextString {
         return new NextString($string);
     }
 
-    public static function array(array $element) : NextArray {
+    public static function array(array $element = NULL) : NextArray {
         return new NextArray($element);
     }
 
-    public static function object(object $obj) : NextObject {
+    public static function object(object $obj = NULL) : NextObject {
         return new NextObject($obj);
     }
 }
