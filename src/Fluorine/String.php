@@ -70,7 +70,7 @@ class NextString {
         return $this;
     }
 
-    public function split(string $delimiter) : NextArray {
+    public function split() : NextArray {
         return str_split($this->string);
     }
 
