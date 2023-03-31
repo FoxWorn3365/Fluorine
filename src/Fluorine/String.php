@@ -79,6 +79,11 @@ class NextString {
         return $this;
     }
 
+    public function last(int $delimiter) : self {
+        $this->replace($this->string, $this->cut($delimiter));
+        return $this;
+    }
+
     public function lenght() : int {
         return strlen($this->string);
     }
