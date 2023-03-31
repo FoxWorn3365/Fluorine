@@ -75,16 +75,7 @@ class NextString {
     }
 
     public function cut(int $delimiter) : self {
-        $count = 0;
-        $compose = '';
-        foreach($this->split()->values() as $key) {
-            if ($count >= $delimiter) {
-                break;
-            }
-            $compose .= $key;
-            $count++;
-        }
-        $this->string = $compose;
+        $this->string = substr($this->string, 0, -$delimiter);
         return $this;
     }
 
