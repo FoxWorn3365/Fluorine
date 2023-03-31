@@ -74,6 +74,10 @@ class NextString {
         return str_split($this->string);
     }
 
+    public function string() : string {
+        return $this->string;
+    }
+
     public function replace(string $char1, string $char2) : self {
         $this->string = str_replace($char1, $char2, $this->string);
         return $this;
