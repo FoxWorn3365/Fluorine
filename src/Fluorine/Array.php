@@ -224,6 +224,11 @@ class NextArray {
         }
     }
 
+    public function join(NextArray|array $object) : self {
+        $this->internalImport($object);
+        return $this;
+    }
+
     public function have(string $value) : bool {
         foreach ($this->elements as $element) {
             if ($element == $value) {
