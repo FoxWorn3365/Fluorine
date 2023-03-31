@@ -80,7 +80,7 @@ class NextString {
     }
 
     public function last(int $delimiter) : self {
-        $this->replace($this->string, $this->cut($delimiter));
+        $this->remove($this->cut($delimiter));
         return $this;
     }
 
