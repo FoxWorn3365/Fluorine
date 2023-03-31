@@ -114,4 +114,12 @@ class NextString {
     public function print() : void {
         print($this->string);
     }
+
+    public function find(string $data) : int|null {
+        return substr_count($this->string, $data);
+    }
+
+    public function has(string $data) : bool {
+        return $this->stripos($data);
+    }
 }
