@@ -281,4 +281,14 @@ class NextArray {
         }
         return $el;
     }
+
+    public function crop(int $pos) : self {
+        $count = 0;
+        foreach ($this->elements as $element) {
+            if ($count >= $pos) {
+                $this->remove($element);
+            }
+        }
+        return $this;
+    }
 }
