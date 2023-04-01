@@ -288,6 +288,7 @@ class NextArray {
             if ($count >= $pos) {
                 $this->remove($element);
             }
+            $count++;
         }
         return $this;
     }
