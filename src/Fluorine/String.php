@@ -146,9 +146,9 @@ class NextString {
     }
 
     public function removeArray(NextArray $elements) : self {
-        $elements->foreach(static function (mixed $key) {
+        foreach ($elements->values() as $key) {
             $this->remove($key);
-        });
+        }
         return $this;
     }
 }
