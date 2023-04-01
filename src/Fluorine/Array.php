@@ -292,10 +292,13 @@ class NextArray {
         foreach ($this->elements as $element) {
             if ($count < $pos) {
                 $self->{$count} = $element;
+            } else {
+                break;
             }
             $count++;
         }
         $this->elements = $self;
+        $this->count = $count;
         return $this;
     }
 }
