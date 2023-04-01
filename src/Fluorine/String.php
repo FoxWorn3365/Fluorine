@@ -150,12 +150,14 @@ class NextString {
             if ($pure1 === false && $pure2 === false) {
                 $this->remove($key);
                 continue;
-            }
+            } elseif ($pure1 === true && $pure2 === true) {
+                $this->remove(" {$key} ");
+                continue;
+            } 
 
             if ($pure1) {
                 $this->remove("{$key} ");
-            }
-            if ($pure2) {
+            } elseif ($pure2) {
                 $this->remove(" {$key}");
             }
         }
