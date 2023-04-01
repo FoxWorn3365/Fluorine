@@ -286,6 +286,7 @@ class NextArray {
         $count = 0;
         foreach ($this->elements as $element) {
             if ($count >= $pos) {
+                var_dump($element);
                 $this->remove($element);
             }
             $count++;
