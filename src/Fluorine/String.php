@@ -107,7 +107,7 @@ class NextString {
     }
 
     public function clone() : self {
-        return $this;
+        return new NextString($this->string);
     }
 
     public function toBase64() : self {
@@ -139,5 +139,16 @@ class NextString {
 
     public function has(string $data) : bool {
         return $this->stripos($data);
+    }
+
+    public function clear() : self {
+        $this->string = str_replace('  ', ' ', $this->string);
+    }
+
+    public function removeArray(NextArray $elements) : self {
+        $elements->foreach(static function (mixed $key) {
+            $this->remove($key);
+        });
+        return $this;
     }
 }

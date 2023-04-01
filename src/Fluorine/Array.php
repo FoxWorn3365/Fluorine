@@ -146,7 +146,7 @@ class NextArray {
     }
     
     public function clone() : NextArray {
-        return $this;
+        return new NextArray($this->values());
     }
 
     public function chunk(int $lenght, bool $backup = false) : self {

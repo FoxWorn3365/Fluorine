@@ -80,6 +80,10 @@ class NextObject {
         }
     }
 
+    public function clone() : NextObject {
+        return new NextObject($this->elements);
+    }
+
     public function remove(string $type, string $search) : bool {
         if ($type === 'key') {
             $this->foreach(function(string $key) use ($search) {
