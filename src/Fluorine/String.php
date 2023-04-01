@@ -145,9 +145,14 @@ class NextString {
         $this->string = str_replace('  ', ' ', $this->string);
     }
 
-    public function removeArray(NextArray $elements) : self {
+    public function removeArray(NextArray $elements, bool $pure = false) : self {
         foreach ($elements->values() as $key) {
-            $this->remove($key);
+            if ($pure) {
+                $this->remove("{$key} ");
+                $this->remove(" {$key}");
+            } else {
+                $this->remove($key);
+            }
         }
         return $this;
     }
