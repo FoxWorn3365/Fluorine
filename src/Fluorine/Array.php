@@ -282,15 +282,20 @@ class NextArray {
         return $el;
     }
 
+    public function dump() : void {
+        var_dump($this->values());
+    }
+
     public function crop(int $pos) : self {
         $count = 0;
+        $self = new ClearObject;
         foreach ($this->elements as $element) {
-            if ($count >= $pos) {
-                var_dump($element);
-                $this->remove($element);
+            if ($count < $pos) {
+                $self->{$count} = $element;
             }
             $count++;
         }
+        $this->elements = $self;
         return $this;
     }
 }
