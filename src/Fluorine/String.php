@@ -163,4 +163,23 @@ class NextString {
         }
         return $this;
     }
+
+    public function replaceArray(NextArray $elements, string $replace, bool $pure1 = false, bool $pure2 = false) : self {
+        foreach ($elements->values() as $key) {
+            if ($pure1 === false && $pure2 === false) {
+                $this->replace($key, $replace);
+                continue;
+            } elseif ($pure1 === true && $pure2 === true) {
+                $this->replace(" {$key} ", $replace);
+                continue;
+            } 
+
+            if ($pure1) {
+                $this->replace("{$key} ", $replace);
+            } elseif ($pure2) {
+                $this->replace(" {$key}", $replace);
+            }
+        }
+        return $this;
+    }
 }

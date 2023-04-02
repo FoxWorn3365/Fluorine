@@ -63,7 +63,6 @@ class NextArray {
     public function count() : int {
         $counter = 0;
         foreach ($this->elements as $v) {
-            $v = NULL;
             $counter++;
         }
         return $counter;
