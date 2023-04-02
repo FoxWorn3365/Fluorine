@@ -143,6 +143,7 @@ class NextString {
 
     public function clear() : self {
         $this->string = str_replace('  ', ' ', $this->string);
+        return $this;
     }
 
     public function removeArray(NextArray $elements, bool $pure1 = false, bool $pure2 = false) : self {
